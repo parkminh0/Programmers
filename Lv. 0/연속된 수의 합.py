@@ -1,11 +1,18 @@
 def solution(num, total):
     answer = []
     
-    tmp = -50
-    while total != int(num*(2*tmp+num-1)/2):
-        tmp += 1
+    start = -50
+    while True:
+        test = start
+        for i in range(1, num):
+            test += start + i
+            
+        if test == total:
+            break
+            
+        start += 1
     
     for i in range(num):
-        answer.append(tmp+i)
+        answer.append(start+i)
         
     return answer

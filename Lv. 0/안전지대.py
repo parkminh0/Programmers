@@ -1,36 +1,29 @@
 def solution(board):
     answer = 0
     tmp = []
+    
     for i in range(len(board)+2):
-        tmp.append(0)
-    
-    for j in board:
-        j.insert(0, 0)
-        j.append(0)
-    
-    board.insert(0,tmp)
-    board.append(tmp)
-    
-    tmp = []
-    for k in range(1, len(board)-1):
-        for l in range(1, len(board)-1):
-            if board[k][l] == 1:
-                tmp.append([k, l])
-                
-    for m in tmp:
-        board[m[0]-1][m[1]-1] = 1
-        board[m[0]-1][m[1]] = 1
-        board[m[0]-1][m[1]+1] = 1
-        board[m[0]][m[1]-1] = 1
-        board[m[0]][m[1]+1] = 1
-        board[m[0]+1][m[1]-1] = 1
-        board[m[0]+1][m[1]] = 1
-        board[m[0]+1][m[1]+1] = 1
-    
-    cnt = 0
-    for x in range(1, len(board)-1):
-        for y in range(1, len(board)-1):
-            cnt += 1
-            if board[x][y] == 1:
+        push = []
+        for j in range(len(board)+2):
+            push.append(0)
+        tmp.append(push)
+
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == 1:
+                tmp[i][j] = 1
+                tmp[i][j+1] = 1
+                tmp[i][j+2] = 1
+                tmp[i+1][j] = 1
+                tmp[i+1][j+1] = 1
+                tmp[i+1][j+2] = 1
+                tmp[i+2][j] = 1
+                tmp[i+2][j+1] = 1
+                tmp[i+2][j+2] = 1
+
+    for i in range(1, len(tmp)-1):
+        for j in range(1, len(tmp)-1):
+            if tmp[i][j] == 0:
                 answer += 1
-    return cnt-answer
+    return answer
+    
